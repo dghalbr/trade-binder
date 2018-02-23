@@ -1,0 +1,26 @@
+.Page {
+  text-align: center;
+}
+
+.Page-header {
+  background-color: #AAA;
+  padding: 20px;
+  color: white;
+}
+
+.Page-nav {
+  padding: 10px;
+}
+
+.Page-title {
+  font-size: 1.5em;
+}
+
+.Page-intro {
+  font-size: large;
+}
+
+@keyframes Page-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
