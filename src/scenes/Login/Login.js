@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
-import { Page } from '../../components/Page/Page';
 import { Button } from '../../components/Button/Button';
+import './Login.css';
 
 export class Login extends Component {
-    
-    login = () => {
-        console.log("Login");
-    };
+  login = () => {
+    this.props.handleLogin(document.getElementById('username').value, document.getElementById('password').value);
+  };
 
-    register = () => {
-        console.log("Register");
-    };
-
-    render() {
-        return (
-            <div>
-                <Page title="Login" />
-                <Button label="Login" handleClick={this.login} />
-                <Button label="Register" handleClick={this.register} />
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <br />
+        <input className="Center" type="text" id="username" />
+        <input className="Center" type="password" id="password" />
+        <Button className="Button" label="Login" handleClick={this.login} />
+      </div>
+    );
+  }
 }
