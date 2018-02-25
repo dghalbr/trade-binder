@@ -16,12 +16,15 @@ defaultApp = firebase.initializeApp({
 export class Auth {
   constructor() {
     //Observe if we're logged in or out
-    firebase.auth()
-    .onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         loggedIn = true;
+        console.log('Auth State Changed.');
+        console.log('Logged in');
       } else {
         loggedIn = false;
+        console.log('Auth State Changed.');
+        console.log('Logged out');
       }
     });
   }
@@ -36,30 +39,32 @@ export class Auth {
       alert('Please enter a password.');
       return;
     }
-  
-    firebase.auth()
-    .createUserWithEmailAndPassword(email, password)
-    .catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      
-      if (errorCode == 'auth/weak-password') {
-        alert('The password is too weak.');
-      } else {
-        alert(errorMessage);
-      }
-      console.log(error);
-    });
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
+        if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+      });
   };
 
   //TODO: Check how to handle errors better
   doSignInWithEmailAndPassword = (email, password) => {
-    firebase.auth()
-    .signInWithEmailAndPassword(email, password)
-    .catch(function (error){
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch(function(error) {
         alert(error.message);
-    });
-  }
+      });
+  };
 
   doSignOut = () => firebase.auth().signOut();
   doPasswordReset = email => firebase.auth().sendPasswordResetEmail(email);

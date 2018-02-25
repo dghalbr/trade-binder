@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Page } from '../../components/Page/Page';
 import { Button } from '../../components/Button/Button';
 import { Auth } from '../../firebase/auth';
 import './Register.css';
@@ -9,19 +8,18 @@ export class Register extends Component {
 
   register = () => {
     this.fireAuth.doCreateUserWithEmailAndPassword(
-      document.getElementById("username").value, 
-      document.getElementById("password").value
+      document.getElementById('username').value,
+      document.getElementById('password').value
     );
   };
 
   render() {
     return (
       <div>
-        <Page title="Register"/>
-        <br/>
-        <input class="Center" type="text" id="username"/>
-        <input class="Center" type="password" id="password"/>
-        <Button class="Button" label="Register" handleClick={this.register} />
+        <br />
+        <input className="Center" type="text" id="username" />
+        <input className="Center" type="password" id="password" />
+        <Button className="Button" label="Register" handleClick={this.register} />
       </div>
     );
   }
