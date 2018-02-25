@@ -7,6 +7,7 @@ export class NavBar extends Component {
     super(props);
   }
 
+  //TODO: May want to make the if logic its own component.
   render() {
     return (
       <div className="NavBar">

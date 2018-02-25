@@ -6,6 +6,8 @@ import { Register } from './scenes/Register/Register';
 import { Auth } from './firebase/auth';
 import { NavBar } from './components/NavBar/NavBar';
 
+const fireAuth = new Auth();
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -14,22 +16,26 @@ class App extends Component {
     };
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
+    this.register = this.register.bind(this);
   }
 
   login = (username, password) => {
-    let fireAuth = new Auth();
     fireAuth.doSignInWithEmailAndPassword(username, password);
     this.setState({ isLoggedIn: true });
     console.log('logged in: ', this.state.isLoggedIn);
   };
 
   logout = () => {
-    let fireAuth = new Auth();
     if (fireAuth.isLoggedIn()) {
       fireAuth.doSignOut();
       console.log('logged out');
     }
     this.setState({ isLoggedIn: false });
+  };
+
+  register = (username, password) => {
+    //TODO: look into firebase callbacks/api for this and log the user in after registering 
+    fireAuth.doCreateUserWithEmailAndPassword(username, password);
   };
 
   render() {
@@ -40,7 +46,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={state => <Home />} />
             <Route path="/login" render={state => <Login handleLogin={this.login} />} />
-            <Route path="/register" render={state => <Register />} />
+            <Route path="/register" render={state => <Register handleRegister={this.register}/>} />
           </Switch>
         </div>
       </Router>

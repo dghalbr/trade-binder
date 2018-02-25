@@ -4,13 +4,14 @@ import { Auth } from '../../firebase/auth';
 import './Register.css';
 
 export class Register extends Component {
-  fireAuth = new Auth();
 
   register = () => {
-    this.fireAuth.doCreateUserWithEmailAndPassword(
+    this.props.handleRegister(
       document.getElementById('username').value,
       document.getElementById('password').value
     );
+    document.getElementById('username').value = null;
+    document.getElementById('password').value = null;
   };
 
   render() {

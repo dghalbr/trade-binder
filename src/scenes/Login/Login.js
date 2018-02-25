@@ -5,6 +5,8 @@ import './Login.css';
 export class Login extends Component {
   login = () => {
     this.props.handleLogin(document.getElementById('username').value, document.getElementById('password').value);
+    document.getElementById('username').value = null;
+    document.getElementById('password').value = null;
   };
 
   render() {
