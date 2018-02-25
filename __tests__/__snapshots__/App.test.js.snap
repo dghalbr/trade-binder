@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: App should match its empty snapshot 1`] = `
+<div>
+  <div
+    className="NavBar"
+  >
+    <div
+      className="NavBar-header"
+    >
+      <h2>
+        Trade Binder
+      </h2>
+      <span
+        className="NavBar-nav"
+      >
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+      </span>
+      <span>
+        <span
+          className="NavBar-nav"
+        >
+          <a
+            href="/login"
+            onClick={[Function]}
+          >
+            Login
+          </a>
+        </span>
+        <span
+          className="NavBar-nav"
+        >
+          <a
+            href="/register"
+            onClick={[Function]}
+          >
+            Register
+          </a>
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+`;

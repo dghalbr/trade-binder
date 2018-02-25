@@ -46,7 +46,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={state => <Home />} />
             <Route path="/login" render={state => <Login handleLogin={this.login} />} />
-            <Route path="/register" render={state => <Register handleRegister={this.register}/>} />
+            <Route path="/register" render={state => <Register handleRegister={this.register} />} />
           </Switch>
         </div>
       </Router>
