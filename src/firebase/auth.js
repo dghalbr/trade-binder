@@ -40,6 +40,19 @@ export class Auth {
       return;
     }
 
+    //Error codes as well as API Docs: https://firebase.google.com/docs/reference/js/firebase.auth.Auth#signInWithEmailAndPassword
+
+    /** Error Codes - createUserWithEmailAndPassword
+     *  auth/email-already-in-use
+     *    Thrown if there already exists an account with the given email address.
+     *  auth/invalid-email
+     *    Thrown if the email address is not valid.
+     *  auth/operation-not-allowed
+     *    Thrown if email/password accounts are not enabled. Enable email/password accounts in the Firebase Console, under the Auth tab.
+     *  auth/weak-password
+     *    Thrown if the password is not strong enough.
+     */
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -58,6 +71,16 @@ export class Auth {
 
   //TODO: Check how to handle errors better
   doSignInWithEmailAndPassword = (email, password) => {
+    /** Error Codes
+     * auth/invalid-email
+     *   Thrown if the email address is not valid.
+     * auth/user-disabled
+     *   Thrown if the user corresponding to the given email has been disabled.
+     * auth/user-not-found
+     *   Thrown if there is no user corresponding to the given email.
+     * auth/wrong-password
+     *   Thrown if the password is invalid for the given email, or the account corresponding to the email does not have a password set.
+     */
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
