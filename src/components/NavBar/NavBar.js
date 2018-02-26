@@ -33,6 +33,7 @@ export class NavBar extends Component {
             </span>
           )}
         </div>
+        <br />
       </div>
     );
   }

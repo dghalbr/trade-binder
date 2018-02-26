@@ -22,13 +22,11 @@ class App extends Component {
   login = (username, password) => {
     fireAuth.doSignInWithEmailAndPassword(username, password);
     this.setState({ isLoggedIn: true });
-    console.log('logged in: ', this.state.isLoggedIn);
   };
 
   logout = () => {
     if (fireAuth.isLoggedIn()) {
       fireAuth.doSignOut();
-      console.log('logged out');
     }
     this.setState({ isLoggedIn: false });
   };
