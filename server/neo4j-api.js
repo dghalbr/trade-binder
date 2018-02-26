@@ -1,7 +1,9 @@
+require('dotenv').config;
+
 const neo4j = require('neo4j-driver').v1;
 const uuid = require('uuid/v4');
 
-const url = process.env.GRAPHENEDB_BOLT_URL;
+const url =  process.env.GRAPHENEDB_BOLT_URL;
 const user = process.env.GRAPHENEDB_BOLT_USER;
 const pass = process.env.GRAPHENEDB_BOLT_PASSWORD;
 
