@@ -4,7 +4,7 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <br />
+        Trade Binder Home Content
       </div>
     );
   }

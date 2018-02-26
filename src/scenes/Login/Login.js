@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Button } from '../../components/Button/Button';
 import './Login.css';
 
 export class Login extends Component {
@@ -12,10 +11,9 @@ export class Login extends Component {
   render() {
     return (
       <div>
-        <br />
-        <input className="Center" type="text" id="username" />
-        <input className="Center" type="password" id="password" />
-        <Button className="Button" label="Login" handleClick={this.login} />
+        <input className="Login-center" type="text" id="username" />
+        <input className="Login-center" type="password" id="password" />
+        <button className="Login-center" onClick={this.login}>Login</button>
       </div>
     );
   }
