@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Register should match its empty snapshot 1`] = `
+<div>
+  <input
+    className="Register-center"
+    id="username"
+    type="text"
+  />
+  <input
+    className="Register-center"
+    id="password"
+    type="password"
+  />
+  <button
+    className="Register-center"
+    onClick={[Function]}
+  >
+    Register
+  </button>
+</div>
+`;

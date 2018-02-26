@@ -43,5 +43,6 @@ exports[`Component: NavBar should match its empty snapshot 1`] = `
       </span>
     </span>
   </div>
+  <br />
 </div>
 `;

@@ -2,6 +2,6 @@
 
 exports[`Component: Home should match its empty snapshot 1`] = `
 <div>
-  <br />
+  Trade Binder Home Content
 </div>
 `;

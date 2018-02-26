@@ -11,9 +11,9 @@ export class Login extends Component {
   render() {
     return (
       <div>
-        <input className="Login-center" type="text" id="username" />
-        <input className="Login-center" type="password" id="password" />
-        <button className="Login-center" onClick={this.login}>Login</button>
+        <input className='Login-center' type='text' id='username' />
+        <input className='Login-center' type='password' id='password' />
+        <button className='LoginButton Login-center' onClick={this.login}>Login</button>
       </div>
     );
   }
