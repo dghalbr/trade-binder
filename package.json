@@ -8,6 +8,7 @@
     "express": "^4.16.2",
     "firebase": "4.10.1",
     "neo4j-driver": "^1.5.3",
+    "mongodb": "3.0.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
