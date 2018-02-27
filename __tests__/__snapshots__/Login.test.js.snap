@@ -13,7 +13,8 @@ exports[`Component: Login should match its empty snapshot 1`] = `
     type="password"
   />
   <button
-    className="LoginButton Login-center"
+    className="Login-center"
+    id="login"
     onClick={[Function]}
   >
     Login

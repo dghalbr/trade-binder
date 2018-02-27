@@ -19,19 +19,19 @@ class App extends Component {
     this.register = this.register.bind(this);
   }
 
-  login = (username, password) => {
+  login(username, password) {
     fireAuth.doSignInWithEmailAndPassword(username, password);
     this.setState({ isLoggedIn: true });
   };
 
-  logout = () => {
+  logout() {
     if (fireAuth.isLoggedIn()) {
       fireAuth.doSignOut();
     }
     this.setState({ isLoggedIn: false });
   };
 
-  register = (username, password) => {
+  register(username, password) {
     //TODO: look into firebase callbacks/api for this and log the user in after registering 
     fireAuth.doCreateUserWithEmailAndPassword(username, password);
   };

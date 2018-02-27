@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Login } from '../src/scenes/Login/Login';
+import Login from '../src/scenes/Login/Login';
 import renderer from 'react-test-renderer';
 import toJson from 'enzyme-to-json';
-import { mount, configure, shallow } from 'enzyme';
+import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ReactTestUtils from 'react-dom/test-utils'; 
 
@@ -20,16 +19,19 @@ describe('Component: Login', () => {
     });
 
     it('should handle the click event', () => {
-        // let handle = jest.fn();
-        // let handle = () => {};reate(<Login handleLogin={ handle }/>)
-        // const wrapper = shallow(<Login />);
-        // wrapper.find(".LoginButton").simulate("click", { preventDefault() {} });
-
-        const spy = jest.spyOn(Login.prototype, 'login');
-const wrapper = mount(<Login  />);
-wrapper.instance().methodName();
-expect(spy).toHaveBeenCalled();
-
-        // expect(handle).toHaveBeenCalled();
-      });
+        /* DGH - The login method calls for .value on these input fields
+         * so this is an attempt to 'mock' them. I'm sure there is
+         * a more correct way. I just don't know what it is yet.
+         */
+        document.body.innerHTML =
+            '<div>' +
+            '  <input id="username" />' +
+            '  <input id="password" />' +
+            '</div>';
+        const fn = jest.fn();
+        const spy = jest.spyOn(Login.prototype, "login");
+        const wrapper = shallow(<Login handleLogin={fn}/>);
+        wrapper.find("#login").simulate('click');
+        expect(spy).toHaveBeenCalled();
+    });
 });
