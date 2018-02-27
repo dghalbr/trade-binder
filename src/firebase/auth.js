@@ -13,7 +13,7 @@ defaultApp = firebase.initializeApp({
   messagingSenderId: '452350586373'
 });
 
-export class Auth {
+export default class Auth {
   constructor() {
     //Observe if we're logged in or out
     firebase.auth().onAuthStateChanged(function(user) {
