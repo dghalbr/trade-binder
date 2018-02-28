@@ -1,4 +1,4 @@
-require('dotenv').config;
+require('dotenv').config({path: './.env'});
 
 const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const Neo4jApi = require('./neo4j-api');
 const app = express();
 const db = new Neo4jApi();
-const port = process.env.REACT_APP_ENV_PORT;
+const port = process.env.ENV_PORT;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 /*
@@ -32,7 +32,7 @@ app.post('/clear', (req, res) => {
 });
 */
 
-MongoClient.connect("mongodb://dustin:dustin@ds137110.mlab.com:37110/telligent", function(err, db) {
+MongoClient.connect("mongodb://"+process.env.MONGO_USER+":"+process.env.MONGO_PASS+"@ds137110.mlab.com:37110/telligent", function(err, db) {
   if(!err) {
     console.log("We are connected");
   } else {
