@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Login should match its empty snapshot 1`] = `
+<div>
+  <input
+    className="Login-center"
+    id="username"
+    type="text"
+  />
+  <input
+    className="Login-center"
+    id="password"
+    type="password"
+  />
+  <button
+    className="Login-center"
+    id="login"
+    onClick={[Function]}
+  >
+    Login
+  </button>
+</div>
+`;
