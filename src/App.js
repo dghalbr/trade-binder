@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-import Home from './scenes/Home/Home';
-import Login from './scenes/Login/Login';
-import Register from './scenes/Register/Register';
-import Auth from './firebase/auth';
-import NavBar from './components/NavBar/NavBar';
+import Home from './Home/Home';
+import Login from './Login/Login';
+import Register from './Register/Register';
+import Auth from './Auth/Auth';
+import NavBar from './NavBar/NavBar';
 
 const fireAuth = new Auth();
 
