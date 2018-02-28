@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from '../src/scenes/Login/Login';
+import Login from '../src/Login/Login';
 import renderer from 'react-test-renderer';
 import toJson from 'enzyme-to-json';
 import { shallow, configure } from 'enzyme';

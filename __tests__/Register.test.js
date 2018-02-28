@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Register from '../src/scenes/Register/Register';
+import Register from '../src/Register/Register';
 import renderer from 'react-test-renderer';
 import toJson from 'enzyme-to-json';
 import { mount, shallow, configure } from 'enzyme';
