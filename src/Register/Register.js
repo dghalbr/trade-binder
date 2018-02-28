@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { Auth } from '../Auth/Auth';
 import './Register.css';
 
 export default class Register extends Component {
