@@ -2,22 +2,40 @@
 
 exports[`Component: Login should match its empty snapshot 1`] = `
 <div>
-  <input
+  <TextField
     className="Login-center"
+    disabled={false}
+    floatingLabelFixed={false}
+    fullWidth={false}
     id="username"
+    multiLine={false}
+    rows={1}
     type="text"
+    underlineShow={true}
   />
-  <input
+  <TextField
     className="Login-center"
+    disabled={false}
+    floatingLabelFixed={false}
+    fullWidth={false}
     id="password"
+    multiLine={false}
+    rows={1}
     type="password"
+    underlineShow={true}
   />
-  <button
+  <br />
+  <RaisedButton
     className="Login-center"
+    color="primary"
+    disabled={false}
+    fullWidth={false}
     id="login"
+    label="Login"
+    labelPosition="after"
     onClick={[Function]}
-  >
-    Login
-  </button>
+    primary={false}
+    secondary={false}
+  />
 </div>
 `;

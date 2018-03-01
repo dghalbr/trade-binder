@@ -1,4 +1,4 @@
-.Appbar {
+.AppBar {
   background-color: #3F51B5;
 }
 
@@ -11,22 +11,51 @@ DropdownItem {
   background-color: #3F51B5;
 }
 
-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 2;
+* {
+  margin: 0;
+  padding: 0;
 }
-
-header ul.mui-list--inline {
-  margin-bottom: 0;
+ 
+nav {
+  display: block;
+  margin: 15px;
 }
-
-header a {
-  color: white;
+ 
+ul {
+  overflow: auto;
+  list-style-type: none;
 }
-
-header table {
-  width: 100%;
+ 
+li {
+  height: 20px;
+  float: left;
+  margin-right: 0px;
+  border-right: 1px solid #000;
+  padding: 0 15px;
+}
+ 
+li:last-child {
+  border-right: none;
+}
+ 
+li a {
+  text-decoration: none;
+  color: #000;
+  font: 14px/1 Helvetica, Verdana, sans-serif;
+  text-transform: uppercase;
+ 
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+ 
+li a:hover {
+  color: #666;
+}
+ 
+li.active a {
+  font-weight: bold;
+  color: #333;
 }

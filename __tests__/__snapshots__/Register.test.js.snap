@@ -2,22 +2,40 @@
 
 exports[`Component: Register should match its empty snapshot 1`] = `
 <div>
-  <input
-    className="Register-center"
+  <TextField
+    className="Login-center"
+    disabled={false}
+    floatingLabelFixed={false}
+    fullWidth={false}
     id="username"
+    multiLine={false}
+    rows={1}
     type="text"
+    underlineShow={true}
   />
-  <input
-    className="Register-center"
+  <TextField
+    className="Login-center"
+    disabled={false}
+    floatingLabelFixed={false}
+    fullWidth={false}
     id="password"
+    multiLine={false}
+    rows={1}
     type="password"
+    underlineShow={true}
   />
-  <button
-    className="Register-center"
+  <br />
+  <RaisedButton
+    className="Login-center"
+    color="primary"
+    disabled={false}
+    fullWidth={false}
     id="register"
+    label="Register"
+    labelPosition="after"
     onClick={[Function]}
-  >
-    Register
-  </button>
+    primary={false}
+    secondary={false}
+  />
 </div>
 `;
