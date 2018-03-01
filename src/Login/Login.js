@@ -23,10 +23,20 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <TextField className="Login-center" type="text" id="username" />
-        <TextField className="Login-center" type="password" id="password" />
+        <TextField  className="Login-center" 
+                    type="text" 
+                    id="username" 
+                    floatingLabelText="Username"/>
+        <TextField  className="Login-center" 
+                    type="password" 
+                    id="password"
+                    floatingLabelText="Password" />
         <br />
-        <RaisedButton primary={true} className="Login-center" label="Login" id="login" onClick={this.login} color="primary" />
+        <RaisedButton   primary={true} 
+                        className="Login-center" 
+                        label="Login" 
+                        id="login" 
+                        onClick={this.login} />
       </div>
     );
   }
