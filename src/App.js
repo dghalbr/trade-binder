@@ -1,48 +1,60 @@
 import React, { Component } from 'react';
-import { Router, browserHistory, Route, Link } from 'react-router';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import Home from './Home/Home';
+import Login from './Login/Login';
+import Register from './Register/Register';
+import Auth from './Auth/Auth';
+import NavBar from './NavBar/NavBar';
+import Container from 'muicss/lib/react/container';
 
-const Page = ({ title }) => (
-    <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>{title}</h2>
-      </div>
-      <p className="App-intro">
-        This is the {title} page.
-      </p>
-      <p>
-        <Link to="/">Home</Link>
-      </p>
-      <p>
-        <Link to="/about">About</Link>
-      </p>
-      <p>
-        <Link to="/settings">Settings</Link>
-      </p>
-    </div>
-);
-
-const Home = (props) => (
-  <Page title="Home"/>
-);
-
-const About = (props) => (
-  <Page title="About"/>
-);
-
-const Settings = (props) => (
-  <Page title="Settings"/>
-);
+const fireAuth = new Auth();
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false
+    };
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    this.register = this.register.bind(this);
+  }
+
+  login(username, password) {
+    fireAuth.doSignInWithEmailAndPassword(username, password);
+    this.setState({ isLoggedIn: true });
+  };
+
+  logout() {
+    if (fireAuth.isLoggedIn()) {
+      fireAuth.doSignOut();
+    }
+    this.setState({ isLoggedIn: false });
+  };
+
+  register(username, password) {
+    //TODO: look into firebase callbacks/api for this and log the user in after registering 
+    fireAuth.doCreateUserWithEmailAndPassword(username, password);
+  };
+
   render() {
     return (
-      <Router history={browserHistory}>
-        <Route path="/" component={Home}/>
-        <Route path="/about" component={About}/>
-        <Route path="/settings" component={Settings}/>
+      <Router>
+        <div>
+          <NavBar isLoggedIn={this.state.isLoggedIn} logout={this.logout} />
+          <div className="mui--appbar-height"></div>
+            <div id="content-wrapper" className="mui--text-center">
+              <br/>
+              <br/>
+              <Container fluid={true}>
+              <Switch>
+                <Route exact path="/" render={state => <Home />} />
+                <Route path="/login" render={state => <Login handleLogin={this.login} />} />
+                <Route path="/register" render={state => <Register handleRegister={this.register} />} />
+              </Switch>
+              </Container>
+            </div>
+        </div>
       </Router>
     );
   }
