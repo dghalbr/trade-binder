@@ -15,13 +15,13 @@ defaultApp = firebase.initializeApp({
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 });
 
-export default class Auth {  constructor() {    //Observe if we're logged in or out
+export default class Auth {
+  constructor() {
+    //Observe if we're logged in or out
     firebase.auth().onAuthStateChanged(function(user) {
-      if (user){
+      if (user) {
         loggedIn = true;
-      } 
-      else
-      {
+      } else {
         loggedIn = false;
       }
     });
