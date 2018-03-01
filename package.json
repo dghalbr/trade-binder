@@ -7,7 +7,6 @@
     "dotenv": "^5.0.0",
     "express": "^4.16.2",
     "firebase": "^4.10.1",
-    "husky": "^0.14.3",
     "mongodb": "^3.0.3",
     "material-ui": "^0.20.0",
     "neo4j-driver": "^1.5.3",
@@ -26,7 +25,7 @@
     "test": "jest",
     "test:coverage": "jest --collectCoverage=true",
     "prettier": "prettier --config ./prettier.json --write \"./src/**/*.js\"",
-    "precommit": "npm run prettier",
+    "precommit": "lint-staged",
     "prepush": "npm run test",
     "eject": "react-scripts eject"
   },
@@ -38,8 +37,10 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
+    "husky": "^0.14.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^22.4.2",
+    "lint-staged": "^7.0.0",
     "prettier": "^1.10.2",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^16.2.0"
@@ -61,5 +62,10 @@
       "/node_modules/",
       "/__tests__/__mocks__/"
     ]
-  }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run prettier",
+      "git add"
+    ]
 }
