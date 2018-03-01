@@ -1,34 +1,13 @@
-/*
-.NavBar {
-  text-align: center;
-}
-
-.NavBar-header {
-  background-color: #AAA;
-  padding: 20px;
-  color: white;
-}
-
-.NavBar-nav {
-  padding: 10px;
-}
-
-.NavBar-title {
-  font-size: 1.5em;
-}
-
-.NavBar-intro {
-  font-size: large;
-}
-
-@keyframes NavBar-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-*/
-
-
 .Appbar {
+  background-color: #3F51B5;
+}
+
+.Dropdown {
+  background-color: #3F51B5;
+}
+
+DropdownItem {
+  color: black;
   background-color: #3F51B5;
 }
 

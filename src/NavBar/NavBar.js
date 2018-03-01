@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './NavBar.css';
 import Appbar from 'muicss/lib/react/appbar';
 
+
 export default class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -18,22 +19,22 @@ export default class NavBar extends Component {
               <tr className="mui--appbar-height">
                 <td className="mui--text-title">Trade Binder</td>
                 <td className="mui--text-right">
-                {!this.props.isLoggedIn ? (
-                  <ul className="mui-list--inline mui--text-body2">
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/login">Login</Link></li>
-                    <li><Link to="/register">Register</Link></li>
-                  </ul>
-                ) : (
-                  <ul className="mui-list--inline mui--text-body2">
-                    <li><Link to="/">Home</Link></li>
-                    <li>
-                      <Link to="/login" onClick={this.props.logout}>
-                        Logout
+                  {!this.props.isLoggedIn ? (
+                    <ul class="mui-list--inline mui--text-body2">
+                      <li><Link to="/" >Home</Link></li>
+                      <li><Link to="/login" >Login</Link></li>
+                      <li><Link to="/register" >Register</Link></li>
+                    </ul>
+                  ) : (
+                    <ul class="mui-list--inline mui--text-body2">
+                      <li><Link to="/" >Home</Link></li>
+                      <li>
+                        <Link to="/login" onClick={this.props.logout}>
+                          Logout
                         </Link>
-                    </li>
-                  </ul>
-                )}
+                      </li>
+                    </ul>
+                  )}
                 </td>
               </tr>
             </table>
@@ -43,30 +44,3 @@ export default class NavBar extends Component {
     );
   }
 }
-/*
-<div className="NavBar">
-        <div className="NavBar-header">
-          <h2>Trade Binder</h2>
-          <span className="NavBar-nav">
-            <Link to="/">Home</Link>
-          </span>
-          {!this.props.isLoggedIn ? (
-            <span>
-              <span className="NavBar-nav">
-                <Link to="/login">Login</Link>
-              </span>
-              <span className="NavBar-nav">
-                <Link to="/register">Register</Link>
-              </span>
-            </span>
-          ) : (
-            <span className="NavBar-nav">
-              <Link to="/login" onClick={this.props.logout}>
-                Logout
-              </Link>
-            </span>
-          )}
-        </div>
-        <br />
-      </div>
-      */
