@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Register.css';
+import Button from 'muicss/lib/react/button';
+import Input from 'muicss/lib/react/input';
 
 export default class Register extends Component {
   constructor(props) {
@@ -16,9 +18,15 @@ export default class Register extends Component {
   render() {
     return (
       <div>
-        <input className="Register-center" type="text" id="username" />
-        <input className="Register-center" type="password" id="password" />
-        <button id="register" className="Register-center" onClick={this.register}>Register</button>
+        <Input className="Register-center" type="text" id="username" />
+        <Input className="Register-center" type="password" id="password" />
+        <br/>
+        <Button id="register" 
+                className="Register-center" 
+                onClick={this.register} 
+                color='primary'>
+                  Register
+        </Button>
       </div>
     );
   }

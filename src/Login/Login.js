@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './Login.css';
+import Button from 'muicss/lib/react/button';
+import Input from 'muicss/lib/react/input';
 
 export default class Login extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.login = this.login.bind(this);
   }
@@ -21,9 +23,12 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <input className='Login-center' type='text' id='username' />
-        <input className='Login-center' type='password' id='password' />
-        <button id="login" className='Login-center' onClick={this.login}>Login</button>
+        <Input className='Login-center' type='text' id='username' />
+        <Input className='Login-center' type='password' id='password' />
+        <br/>
+        <Button id="login" className='Login-center' onClick={this.login} color='primary'>
+          Login
+        </Button>
       </div>
     );
   }

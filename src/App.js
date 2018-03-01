@@ -5,6 +5,7 @@ import Login from './Login/Login';
 import Register from './Register/Register';
 import Auth from './Auth/Auth';
 import NavBar from './NavBar/NavBar';
+import Container from 'muicss/lib/react/container';
 
 const fireAuth = new Auth();
 
@@ -41,11 +42,18 @@ class App extends Component {
       <Router>
         <div>
           <NavBar isLoggedIn={this.state.isLoggedIn} logout={this.logout} />
-          <Switch>
-            <Route exact path="/" render={state => <Home />} />
-            <Route path="/login" render={state => <Login handleLogin={this.login} />} />
-            <Route path="/register" render={state => <Register handleRegister={this.register} />} />
-          </Switch>
+          <div className="mui--appbar-height"></div>
+            <div id="content-wrapper" className="mui--text-center">
+              <br/>
+              <br/>
+              <Container fluid={true}>
+              <Switch>
+                <Route exact path="/" render={state => <Home />} />
+                <Route path="/login" render={state => <Login handleLogin={this.login} />} />
+                <Route path="/register" render={state => <Register handleRegister={this.register} />} />
+              </Switch>
+              </Container>
+            </div>
         </div>
       </Router>
     );
