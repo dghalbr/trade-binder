@@ -6,6 +6,7 @@ exports[`Component: Register should match its empty snapshot 1`] = `
     className="Login-center"
     disabled={false}
     floatingLabelFixed={false}
+    floatingLabelText="Username"
     fullWidth={false}
     id="username"
     multiLine={false}
@@ -17,6 +18,7 @@ exports[`Component: Register should match its empty snapshot 1`] = `
     className="Login-center"
     disabled={false}
     floatingLabelFixed={false}
+    floatingLabelText="Password"
     fullWidth={false}
     id="password"
     multiLine={false}
@@ -27,14 +29,13 @@ exports[`Component: Register should match its empty snapshot 1`] = `
   <br />
   <RaisedButton
     className="Login-center"
-    color="primary"
     disabled={false}
     fullWidth={false}
     id="register"
     label="Register"
     labelPosition="after"
     onClick={[Function]}
-    primary={false}
+    primary={true}
     secondary={false}
   />
 </div>
