@@ -25,7 +25,7 @@
     "test": "jest",
     "test:coverage": "jest --collectCoverage=true",
     "prettier": "prettier --config ./prettier.json --write \"./src/**/*.js\"",
-    "pre-commit": "lint-staged",
+    "precommit": "lint-staged",
     "pre-push": "npm run test",
     "eject": "react-scripts eject"
   },
