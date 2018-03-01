@@ -18,20 +18,12 @@ export default class Register extends Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-        <div>
-          <TextField className="Login-center" type="text" id="username" />
-          <TextField className="Login-center" type="password" id="password" />
-          <br />
-          <RaisedButton
-            className="Login-center"
-            label="Register"
-            id="register"
-            onClick={this.register}
-            color="primary"
-          />
-        </div>
-      </MuiThemeProvider>
+      <div>
+        <TextField className="Login-center" type="text" id="username" />
+        <TextField className="Login-center" type="password" id="password" />
+        <br />
+        <RaisedButton className="Login-center" label="Register" id="register" onClick={this.register} color="primary" />
+      </div>
     );
   }
 }

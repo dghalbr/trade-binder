@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './Login.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export default class Login extends Component {
   constructor(props) {
@@ -23,14 +22,12 @@ export default class Login extends Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-        <div>
-          <TextField className="Login-center" type="text" id="username" />
-          <TextField className="Login-center" type="password" id="password" />
-          <br />
-          <RaisedButton className="Login-center" label="Login" id="login" onClick={this.login} color="primary" />
-        </div>
-      </MuiThemeProvider>
+      <div>
+        <TextField className="Login-center" type="text" id="username" />
+        <TextField className="Login-center" type="password" id="password" />
+        <br />
+        <RaisedButton className="Login-center" label="Login" id="login" onClick={this.login} color="primary" />
+      </div>
     );
   }
 }

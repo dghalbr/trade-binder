@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Login from '../src/Login/Login';
-import renderer from 'react-test-renderer';
-import toJson from 'enzyme-to-json';
+import shallowToJson from 'enzyme-to-json';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ReactTestUtils from 'react-dom/test-utils'; 
@@ -11,11 +10,10 @@ configure({ adapter: new Adapter() });
 
 describe('Component: Login', () => {
     it('should match its empty snapshot', () => {
-        const tree = renderer.create(
+        const output = shallow(
             <Login />
-        ).toJSON();
-
-        expect(tree).toMatchSnapshot();
+        );
+        expect(shallowToJson(output)).toMatchSnapshot();
     });
 
     it('should handle the click event', () => {

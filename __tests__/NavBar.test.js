@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import NavBar from '../src/NavBar/NavBar';
 import renderer from 'react-test-renderer';
-import toJson from 'enzyme-to-json';
-import { shallow } from 'enzyme';
+import shallowToJson from 'enzyme-to-json';
+import Adapter from 'enzyme-adapter-react-16';
+import { shallow, configure } from 'enzyme';
+
+configure({ adapter: new Adapter() });
 
 describe('Component: NavBar', () => {
     it('should match its empty snapshot', () => {
@@ -14,12 +17,11 @@ describe('Component: NavBar', () => {
         //used in the App component, the App component wraps the NavBar component in
         //the correct Router tag. The test just can't see this. In the meantime we
         //can just do this for the tests to work, but there has to be a better way.
-        const tree = renderer.create(
+        const output = shallow(
             <Router>
                 <NavBar />
             </Router>
-        ).toJSON();
-
-        expect(tree).toMatchSnapshot();
+        );
+        expect(shallowToJson(output)).toMatchSnapshot();
     });
 });
