@@ -22,7 +22,7 @@ export default class Register extends Component {
         <TextField className="Login-center" type="text" id="username" />
         <TextField className="Login-center" type="password" id="password" />
         <br />
-        <RaisedButton className="Login-center" label="Register" id="register" onClick={this.register} color="primary" />
+        <RaisedButton primary={true} className="Login-center" label="Register" id="register" onClick={this.register} color="primary" />
       </div>
     );
   }

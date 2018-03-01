@@ -26,7 +26,7 @@ export default class Login extends Component {
         <TextField className="Login-center" type="text" id="username" />
         <TextField className="Login-center" type="password" id="password" />
         <br />
-        <RaisedButton className="Login-center" label="Login" id="login" onClick={this.login} color="primary" />
+        <RaisedButton primary={true} className="Login-center" label="Login" id="login" onClick={this.login} color="primary" />
       </div>
     );
   }
