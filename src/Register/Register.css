@@ -1,4 +1,5 @@
 .Register-center {
     margin: auto;
-    display: block;
+    display: block !important;
+    width: 30%;
 }
