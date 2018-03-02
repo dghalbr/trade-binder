@@ -10,7 +10,7 @@ export default class NavBar extends Component {
     super(props);
   }
 
-  logoutHandler(){
+  logoutHandler() {
     this.props.drawerToggle;
     this.props.logout;
   }
@@ -21,16 +21,16 @@ export default class NavBar extends Component {
       <div>
         <AppBar onClick={this.props.drawerToggle} className="NavBar" title="TradeBinder" />
         {!this.props.isLoggedIn ? (
-        <Drawer open={this.props.appDrawerOpen}>
-          <MenuItem primaryText="Home" onClick={this.props.drawerToggle} containerElement={<Link to="/" />} />
-          <MenuItem primaryText="Login" onClick={this.props.drawerToggle} containerElement={<Link to="/login" />} />
-          <MenuItem
-            primaryText="Register"
-            onClick={this.props.drawerToggle}
-            containerElement={<Link to="/register" />}
-          />
+          <Drawer open={this.props.appDrawerOpen}>
+            <MenuItem primaryText="Home" onClick={this.props.drawerToggle} containerElement={<Link to="/" />} />
+            <MenuItem primaryText="Login" onClick={this.props.drawerToggle} containerElement={<Link to="/login" />} />
+            <MenuItem
+              primaryText="Register"
+              onClick={this.props.drawerToggle}
+              containerElement={<Link to="/register" />}
+            />
           </Drawer>
-        ):(
+        ) : (
           <Drawer open={this.props.appDrawerOpen}>
             <MenuItem primaryText="Home" onClick={this.props.drawerToggle} containerElement={<Link to="/" />} />
             <MenuItem primaryText="Logout" onClick={this.logoutHandler} containerElement={<Link to="/login" />} />
