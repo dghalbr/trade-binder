@@ -19,20 +19,10 @@ export default class Register extends Component {
   render() {
     return (
       <div>
-        <TextField  className="Login-center" 
-                    type="text" 
-                    id="username"
-                    floatingLabelText="Username" />
-        <TextField  className="Login-center" 
-                    type="password" 
-                    id="password"
-                    floatingLabelText="Password" />
+        <TextField className="Login-center" type="text" id="username" floatingLabelText="Username" />
+        <TextField className="Login-center" type="password" id="password" floatingLabelText="Password" />
         <br />
-        <RaisedButton primary={true} 
-                      className="Login-center" 
-                      label="Register" 
-                      id="register" 
-                      onClick={this.register} />
+        <RaisedButton primary={true} className="Login-center" label="Register" id="register" onClick={this.register} />
       </div>
     );
   }
