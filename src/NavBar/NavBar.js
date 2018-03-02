@@ -8,6 +8,7 @@ import Drawer from 'material-ui/Drawer';
 export default class NavBar extends Component {
   constructor(props) {
     super(props);
+    this.logoutHandler = this.logoutHandler.bind(this);
   }
 
   logoutHandler() {

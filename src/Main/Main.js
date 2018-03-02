@@ -23,14 +23,14 @@ export default class Main extends Component {
 
   login(username, password) {
     fireAuth.doSignInWithEmailAndPassword(username, password);
-    this.setState({ isLoggedIn: true });
+    this.setState({ ...this.state, isLoggedIn: true });
   }
 
   logout() {
     if (fireAuth.isLoggedIn()) {
       fireAuth.doSignOut();
     }
-    this.setState({ isLoggedIn: false });
+    this.setState({ ...this.state, isLoggedIn: false });
   }
 
   register(username, password) {
@@ -39,7 +39,7 @@ export default class Main extends Component {
   }
 
   drawerToggle() {
-    this.setState({ appDrawerOpen: !this.state.appDrawerOpen });
+    this.setState({ ...this.state, appDrawerOpen: !this.state.appDrawerOpen });
   }
 
   render() {
