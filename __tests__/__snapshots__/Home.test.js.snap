@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Component: Home should match its empty snapshot 1`] = `
-<div>
-  Trade Binder Home Content
-</div>
-`;
