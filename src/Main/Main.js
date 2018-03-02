@@ -12,11 +12,13 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      appDrawerOpen: false
     };
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.register = this.register.bind(this);
+    this.drawerToggle = this.drawerToggle.bind(this);
   }
 
   login(username, password) {
@@ -36,11 +38,18 @@ export default class Main extends Component {
     fireAuth.doCreateUserWithEmailAndPassword(username, password);
   }
 
+  drawerToggle() { 
+    this.setState({appDrawerOpen: !this.state.appDrawerOpen});
+  }
+
   render() {
     return (
       <Router>
         <div>
-          <NavBar isLoggedIn={this.state.isLoggedIn} logout={this.logout} />
+          <NavBar isLoggedIn={this.state.isLoggedIn} 
+                  logout={this.logout} 
+                  appDrawerOpen={this.state.appDrawerOpen} 
+                  drawerToggle={this.drawerToggle}/>
           <div id="content-wrapper">
             <br />
             <br />
