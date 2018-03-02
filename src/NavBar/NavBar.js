@@ -10,11 +10,17 @@ export default class NavBar extends Component {
     super(props);
   }
 
+  logoutHandler(){
+    this.props.drawerToggle;
+    this.props.logout;
+  }
+
   //TODO: May want to make the if logic its own component.
   render() {
     return (
       <div>
         <AppBar onClick={this.props.drawerToggle} className="NavBar" title="TradeBinder" />
+        {!this.props.isLoggedIn ? (
         <Drawer open={this.props.appDrawerOpen}>
           <MenuItem primaryText="Home" onClick={this.props.drawerToggle} containerElement={<Link to="/" />} />
           <MenuItem primaryText="Login" onClick={this.props.drawerToggle} containerElement={<Link to="/login" />} />
@@ -23,7 +29,13 @@ export default class NavBar extends Component {
             onClick={this.props.drawerToggle}
             containerElement={<Link to="/register" />}
           />
-        </Drawer>
+          </Drawer>
+        ):(
+          <Drawer open={this.props.appDrawerOpen}>
+            <MenuItem primaryText="Home" onClick={this.props.drawerToggle} containerElement={<Link to="/" />} />
+            <MenuItem primaryText="Logout" onClick={this.logoutHandler} containerElement={<Link to="/login" />} />
+          </Drawer>
+        )}
       </div>
     );
   }
