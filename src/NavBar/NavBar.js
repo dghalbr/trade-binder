@@ -14,14 +14,15 @@ export default class NavBar extends Component {
   render() {
     return (
       <div>
-        <AppBar onClick={this.props.drawerToggle} className="NavBar" title='TradeBinder'/>
-        <Drawer open={this.props.appDrawerOpen} >
-          <MenuItem primaryText="Home" onClick={this.props.drawerToggle}
-                    containerElement={<Link to="/" />}/>
-          <MenuItem primaryText="Login" onClick={this.props.drawerToggle}
-                    containerElement={<Link to="/login" />}/>
-          <MenuItem primaryText="Register" onClick={this.props.drawerToggle}
-                    containerElement={<Link to="/register" />}/>
+        <AppBar onClick={this.props.drawerToggle} className="NavBar" title="TradeBinder" />
+        <Drawer open={this.props.appDrawerOpen}>
+          <MenuItem primaryText="Home" onClick={this.props.drawerToggle} containerElement={<Link to="/" />} />
+          <MenuItem primaryText="Login" onClick={this.props.drawerToggle} containerElement={<Link to="/login" />} />
+          <MenuItem
+            primaryText="Register"
+            onClick={this.props.drawerToggle}
+            containerElement={<Link to="/register" />}
+          />
         </Drawer>
       </div>
     );

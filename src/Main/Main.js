@@ -38,18 +38,20 @@ export default class Main extends Component {
     fireAuth.doCreateUserWithEmailAndPassword(username, password);
   }
 
-  drawerToggle() { 
-    this.setState({appDrawerOpen: !this.state.appDrawerOpen});
+  drawerToggle() {
+    this.setState({ appDrawerOpen: !this.state.appDrawerOpen });
   }
 
   render() {
     return (
       <Router>
         <div>
-          <NavBar isLoggedIn={this.state.isLoggedIn} 
-                  logout={this.logout} 
-                  appDrawerOpen={this.state.appDrawerOpen} 
-                  drawerToggle={this.drawerToggle}/>
+          <NavBar
+            isLoggedIn={this.state.isLoggedIn}
+            logout={this.logout}
+            appDrawerOpen={this.state.appDrawerOpen}
+            drawerToggle={this.drawerToggle}
+          />
           <div id="content-wrapper">
             <br />
             <br />
