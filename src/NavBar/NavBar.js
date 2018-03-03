@@ -8,15 +8,6 @@ import Drawer from 'material-ui/Drawer';
 export default class NavBar extends Component {
   constructor(props) {
     super(props);
-    this.logoutHandler = this.logoutHandler.bind(this);
-  }
-
-  logoutHandler() {
-    this.props.drawerToggle();
-    //Due to a timing issue updating the state in both of these
-    //functions this setTimeout seemed necessary. The toggle will
-    //happen via state update and then logout will happen.
-    setTimeout(self => self.props.logout(), 500, this);
   }
 
   //TODO: May want to make the if logic its own component.
@@ -37,7 +28,7 @@ export default class NavBar extends Component {
         ) : (
           <Drawer open={this.props.appDrawerOpen}>
             <MenuItem primaryText="Home" onClick={this.props.drawerToggle} containerElement={<Link to="/" />} />
-            <MenuItem primaryText="Logout" onClick={this.logoutHandler} containerElement={<Link to="/login" />} />
+            <MenuItem primaryText="Logout" onClick={this.props.logout} containerElement={<Link to="/login" />} />
           </Drawer>
         )}
       </div>

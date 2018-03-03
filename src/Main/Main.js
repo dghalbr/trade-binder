@@ -6,13 +6,13 @@ import Register from '../Register/Register';
 import Auth from '../Auth/Auth';
 import NavBar from '../NavBar/NavBar';
 
-const fireAuth = new Auth();
+const auth = new Auth();
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
+      isLoggedIn: auth.isLoggedIn(),
       appDrawerOpen: false
     };
     this.login = this.login.bind(this);
@@ -22,20 +22,22 @@ export default class Main extends Component {
   }
 
   login(username, password) {
-    fireAuth.doSignInWithEmailAndPassword(username, password);
-    this.setState({ ...this.state, isLoggedIn: true });
+    auth.doSignInWithEmailAndPassword(username, password);
+    if (auth.isLoggedIn()) {
+      this.setState({ ...this.state, isLoggedIn: true });
+    }
   }
 
   logout() {
-    if (fireAuth.isLoggedIn()) {
-      fireAuth.doSignOut();
+    if (auth.isLoggedIn()) {
+      auth.doSignOut();
     }
-    this.setState({ ...this.state, isLoggedIn: false });
+    this.setState({ ...this.state, isLoggedIn: false, appDrawerOpen: false });
   }
 
   register(username, password) {
     //TODO: look into firebase callbacks/api for this and log the user in after registering
-    fireAuth.doCreateUserWithEmailAndPassword(username, password);
+    auth.doCreateUserWithEmailAndPassword(username, password);
   }
 
   drawerToggle() {
