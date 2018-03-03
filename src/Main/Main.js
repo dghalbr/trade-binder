@@ -30,7 +30,8 @@ export default class Main extends Component {
     if (fireAuth.isLoggedIn()) {
       fireAuth.doSignOut();
     }
-    this.setState({ ...this.state, isLoggedIn: false });
+    //appDrawerOpen is set to false because we want to close the drawer on a logout
+    this.setState({ ...this.state, isLoggedIn: false, appDrawerOpen: false });
   }
 
   register(username, password) {
