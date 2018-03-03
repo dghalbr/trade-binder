@@ -12,8 +12,11 @@ export default class NavBar extends Component {
   }
 
   logoutHandler() {
-    this.props.logout();
     this.props.drawerToggle();
+    //Due to a timing issue updating the state in both of these
+    //functions this setTimeout seemed necessary. The toggle will
+    //happen via state update and then logout will happen.
+    setTimeout(self => self.props.logout(), 500, this);
   }
 
   //TODO: May want to make the if logic its own component.
