@@ -12,8 +12,8 @@ export default class NavBar extends Component {
   }
 
   logoutHandler() {
-    this.props.drawerToggle();
     this.props.logout();
+    this.props.drawerToggle();
   }
 
   //TODO: May want to make the if logic its own component.
