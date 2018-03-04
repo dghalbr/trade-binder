@@ -23,6 +23,7 @@ export default class Login extends Component {
   render() {
     return (
       <div>
+        <h1>Login</h1>
         <TextField className="Login-center" type="text" id="username" floatingLabelText="Username" />
         <TextField className="Login-center" type="password" id="password" floatingLabelText="Password" />
         <br />

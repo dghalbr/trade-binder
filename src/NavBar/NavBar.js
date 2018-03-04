@@ -28,6 +28,11 @@ export default class NavBar extends Component {
         ) : (
           <Drawer open={this.props.appDrawerOpen}>
             <MenuItem primaryText="Home" onClick={this.props.drawerToggle} containerElement={<Link to="/" />} />
+            <MenuItem
+              primaryText="Account"
+              onClick={this.props.drawerToggle}
+              containerElement={<Link to="/account" />}
+            />
             <MenuItem primaryText="Logout" onClick={this.props.logout} containerElement={<Link to="/login" />} />
           </Drawer>
         )}
