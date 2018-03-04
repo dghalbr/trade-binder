@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import AccountInfo from './components/AccountInfo/AccountInfo';
 import './Account.css';
 
 export default class Account extends Component {
@@ -15,6 +13,6 @@ export default class Account extends Component {
   }
 
   render() {
-    return <div>{!this.props.user ? <Redirect to="/login" /> : <AccountInfo user={this.props.user} />}</div>;
+    return <h1>Account for {this.props.user.email}</h1>;
   }
 }

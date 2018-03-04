@@ -83,11 +83,7 @@ export default class Auth {
   /**
    * Sign out of the application via Firebase
    */
-  doSignOut = () =>
-    firebase
-      .auth()
-      .signOut()
-      .then(() => console.log('signed out'));
+  doSignOut = () => firebase.auth().signOut();
 
   /**
    * Reset a User's password via Firebase

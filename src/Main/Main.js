@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Auth from '../Auth/Auth';
 import Account from '../Account/Account';
 import NavBar from '../NavBar/NavBar';
+import createBrowserHistory from 'history/createBrowserHistory';
 
+const history = createBrowserHistory();
 const auth = new Auth();
 
 export default class Main extends Component {
@@ -20,8 +22,9 @@ export default class Main extends Component {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.register = this.register.bind(this);
-    this.getCurrentUser = this.getCurrentUser.bind(this);
     this.drawerToggle = this.drawerToggle.bind(this);
+    this.passwordUpdate = this.passwordUpdate.bind(this);
+    this.passwordReset = this.passwordReset.bind(this);
   }
 
   componentDidUpdate() {
@@ -46,6 +49,7 @@ export default class Main extends Component {
         .doSignInAndRetrieveDataWithEmailAndPassword(username, password)
         .then(user => {
           this.setState({ ...this.state, user: user.user, isLoggedIn: true, appDrawerOpen: false });
+          history.push({ pathname: '/account' });
         })
         .catch(function(error) {
           // Handle Errors here.
@@ -65,10 +69,10 @@ export default class Main extends Component {
    * Logout of the application via Firebase
    */
   logout() {
-    if (auth.isLoggedIn()) {
-      auth.doSignOut();
-    }
-    this.setState({ ...this.state, user: null, isLoggedIn: false, appDrawerOpen: false });
+    auth.doSignOut().then(() => {
+      this.setState({ ...this.state, user: null, isLoggedIn: false, appDrawerOpen: false });
+      history.push({ pathname: '/login' });
+    });
   }
 
   /**
@@ -81,6 +85,7 @@ export default class Main extends Component {
       .doCreateUserWithEmailAndPassword(username, password)
       .then(user => {
         this.setState({ ...this.state, user: user, isLoggedIn: true, appDrawerOpen: false });
+        history.push({ pathname: '/account' });
       })
       .catch(function(error) {
         var errorCode = error.code;
@@ -93,13 +98,19 @@ export default class Main extends Component {
         }
       });
   }
-
   /**
-   * Get the User object of the currently logged in User
-   * @returns {Object} user
+   * Update a User's password via Firebase
+   * @param  {string} password
    */
-  getCurrentUser() {
-    return auth.getCurrentUser();
+  passwordUpdate(password) {
+    auth.doPasswordUpdate();
+  }
+  /**
+   * Reset a User's password via Firebase
+   * @param  {string} email
+   */
+  passwordReset(email) {
+    auth.doPasswordReset(email);
   }
 
   /**
@@ -111,7 +122,7 @@ export default class Main extends Component {
 
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div>
           <NavBar
             isLoggedIn={this.state.isLoggedIn}
@@ -124,14 +135,22 @@ export default class Main extends Component {
             <br />
             <Switch>
               <Route exact path="/" render={state => <Home />} />
-              <Route
-                path="/login"
-                render={state => (
-                  <Login isLoggedIn={this.state.isLoggedIn} user={this.state.user} handleLogin={this.login} />
-                )}
-              />
+              <Route path="/login" render={state => <Login user={this.state.user} handleLogin={this.login} />} />
               <Route path="/register" render={state => <Register handleRegister={this.register} />} />
-              <Route path="/account" render={state => <Account user={this.state.user} />} />
+              <Route
+                path="/account"
+                render={state =>
+                  this.state.user ? (
+                    <Account
+                      user={this.state.user}
+                      passwordUpdate={this.passwordUpdate}
+                      passwordReset={this.passwordReset}
+                    />
+                  ) : (
+                    <Redirect to="/login" />
+                  )
+                }
+              />
             </Switch>
           </div>
         </div>
