@@ -38,6 +38,44 @@ export default class Main extends Component {
     }
   }
 
+  render() {
+    return (
+      <Router history={history}>
+        <div>
+          <NavBar
+            isLoggedIn={this.state.isLoggedIn}
+            logout={this.logout}
+            appDrawerOpen={this.state.appDrawerOpen}
+            drawerToggle={this.drawerToggle}
+          />
+          <div id="content-wrapper">
+            <br />
+            <br />
+            <Switch>
+              <Route exact path="/" render={state => <Home />} />
+              <Route path="/login" render={state => <Login user={this.state.user} handleLogin={this.login} />} />
+              <Route path="/register" render={state => <Register handleRegister={this.register} />} />
+              <Route
+                path="/account"
+                render={state =>
+                  this.state.user ? (
+                    <Account
+                      user={this.state.user}
+                      passwordUpdate={this.passwordUpdate}
+                      passwordReset={this.passwordReset}
+                    />
+                  ) : (
+                    <Redirect to="/login" />
+                  )
+                }
+              />
+            </Switch>
+          </div>
+        </div>
+      </Router>
+    );
+  }
+
   /**
    * Login to the application via Firebase
    * @param  {string} username
@@ -103,14 +141,14 @@ export default class Main extends Component {
    * @param  {string} password
    */
   passwordUpdate(password) {
-    auth.doPasswordUpdate();
+    return this.state.user.updatePassword(password);
   }
   /**
    * Reset a User's password via Firebase
    * @param  {string} email
    */
   passwordReset(email) {
-    auth.doPasswordReset(email);
+    return auth.doPasswordReset(email);
   }
 
   /**
@@ -118,43 +156,5 @@ export default class Main extends Component {
    */
   drawerToggle() {
     this.setState({ ...this.state, user: this.state.user, appDrawerOpen: !this.state.appDrawerOpen });
-  }
-
-  render() {
-    return (
-      <Router history={history}>
-        <div>
-          <NavBar
-            isLoggedIn={this.state.isLoggedIn}
-            logout={this.logout}
-            appDrawerOpen={this.state.appDrawerOpen}
-            drawerToggle={this.drawerToggle}
-          />
-          <div id="content-wrapper">
-            <br />
-            <br />
-            <Switch>
-              <Route exact path="/" render={state => <Home />} />
-              <Route path="/login" render={state => <Login user={this.state.user} handleLogin={this.login} />} />
-              <Route path="/register" render={state => <Register handleRegister={this.register} />} />
-              <Route
-                path="/account"
-                render={state =>
-                  this.state.user ? (
-                    <Account
-                      user={this.state.user}
-                      passwordUpdate={this.passwordUpdate}
-                      passwordReset={this.passwordReset}
-                    />
-                  ) : (
-                    <Redirect to="/login" />
-                  )
-                }
-              />
-            </Switch>
-          </div>
-        </div>
-      </Router>
-    );
   }
 }
