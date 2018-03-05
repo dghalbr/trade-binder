@@ -8,12 +8,6 @@ import Drawer from 'material-ui/Drawer';
 export default class NavBar extends Component {
   constructor(props) {
     super(props);
-    this.logoutHandler = this.logoutHandler.bind(this);
-  }
-
-  logoutHandler() {
-    this.props.logout();
-    this.props.drawerToggle();
   }
 
   //TODO: May want to make the if logic its own component.
@@ -34,7 +28,12 @@ export default class NavBar extends Component {
         ) : (
           <Drawer open={this.props.appDrawerOpen}>
             <MenuItem primaryText="Home" onClick={this.props.drawerToggle} containerElement={<Link to="/" />} />
-            <MenuItem primaryText="Logout" onClick={this.logoutHandler} containerElement={<Link to="/login" />} />
+            <MenuItem
+              primaryText="Account"
+              onClick={this.props.drawerToggle}
+              containerElement={<Link to="/account" />}
+            />
+            <MenuItem primaryText="Logout" onClick={this.props.logout} containerElement={<Link to="/login" />} />
           </Drawer>
         )}
       </div>

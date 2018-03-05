@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 dotenv.config({ silent: true });
 
 let defaultApp = null;
-let loggedIn = false;
 
 //Not sure this should be on the client as plain text?
 defaultApp = firebase.initializeApp({
@@ -20,13 +19,20 @@ export default class Auth {
     //Observe if we're logged in or out
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        loggedIn = true;
+        console.log('Logged In');
       } else {
-        loggedIn = false;
+        console.log('Logged Out');
       }
     });
   }
-
+  /**
+   * Creates a new User via Firebase. If successful it also
+   * logs that new User into the application.
+   *
+   * @param  {string} email
+   * @param  {string} password
+   * @returns {Object} A User object on Resolve and an Error object on Reject.
+   */
   doCreateUserWithEmailAndPassword = (email, password) => {
     if (email.length < 4) {
       alert('Please enter an email address.');
@@ -51,23 +57,16 @@ export default class Auth {
      *    Thrown if the password is not strong enough.
      */
 
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-
-        if (errorCode == 'auth/weak-password') {
-          alert('The password is too weak.');
-        } else {
-          alert(errorMessage);
-        }
-      });
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
   };
 
-  //TODO: Check how to handle errors better
-  doSignInWithEmailAndPassword = (email, password) => {
+  /**
+   * Sign into the application via Firebase and retrieve User Data.
+   * @param  {string} email
+   * @param  {string} password
+   * @returns {Object} A User object on Resolve and an Error object on Reject.
+   */
+  doSignInAndRetrieveDataWithEmailAndPassword = (email, password) => {
     /** Error Codes
      * auth/invalid-email
      *   Thrown if the email address is not valid.
@@ -78,16 +77,41 @@ export default class Auth {
      * auth/wrong-password
      *   Thrown if the password is invalid for the given email, or the account corresponding to the email does not have a password set.
      */
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch(function(error) {
-        alert(error.message);
-      });
+    return firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password);
   };
 
+  /**
+   * Sign out of the application via Firebase
+   */
   doSignOut = () => firebase.auth().signOut();
+
+  /**
+   * Reset a User's password via Firebase
+   * @param {string} email
+   */
   doPasswordReset = email => firebase.auth().sendPasswordResetEmail(email);
+
+  /**
+   * Update a User's password via Firebase
+   * @param {string} password
+   */
   doPasswordUpdate = password => firebase.auth().currentUser.updatePassword(password);
-  isLoggedIn = () => loggedIn;
+
+  /**
+   * Returns if there is a current user signed into the application
+   * @returns {boolean}
+   */
+  isLoggedIn = () => {
+    let currentUser = firebase.auth().currentUser;
+    return currentUser ? currentUser.user !== null : false;
+  };
+
+  /**
+   * Get the User object of the current User
+   * @returns {Object}
+   */
+  getCurrentUser = () => {
+    let currentUser = firebase.auth().currentUser;
+    return currentUser ? currentUser.user : null;
+  };
 }
