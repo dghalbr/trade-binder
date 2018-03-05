@@ -53,17 +53,18 @@ export default class Main extends Component {
             <br />
             <Switch>
               <Route exact path="/" render={state => <Home />} />
-              <Route path="/login" render={state => <Login user={this.state.user} handleLogin={this.login} />} />
+              <Route
+                path="/login"
+                render={state => (
+                  <Login user={this.state.user} handleLogin={this.login} passwordReset={this.passwordReset} />
+                )}
+              />
               <Route path="/register" render={state => <Register handleRegister={this.register} />} />
               <Route
                 path="/account"
                 render={state =>
                   this.state.user ? (
-                    <Account
-                      user={this.state.user}
-                      passwordUpdate={this.passwordUpdate}
-                      passwordReset={this.passwordReset}
-                    />
+                    <Account user={this.state.user} passwordUpdate={this.passwordUpdate} />
                   ) : (
                     <Redirect to="/login" />
                   )

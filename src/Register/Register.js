@@ -18,7 +18,7 @@ export default class Register extends Component {
   render() {
     return (
       <div>
-        <h1>Register</h1>
+        <h1 className="Register-center">Register</h1>
         <TextField className="Register-center" type="text" id="username" floatingLabelText="Username" />
         <TextField className="Register-center" type="password" id="password" floatingLabelText="Password" />
         <br />
