@@ -3,3 +3,21 @@
     display: block !important;
     width: 30%;
 }
+
+.iconStyles {
+  font-size: inherit !important;
+  line-height: inherit !important;
+  vertical-align: middle !important;
+}
+
+.firstColumn {
+  width: 12px;
+}
+
+.wantColumn {
+  width: 50px;
+}
+
+.tradeColumn {
+  width: 50px;
+}
