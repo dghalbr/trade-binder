@@ -7,9 +7,6 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/fontawesome-free-solid';
 
-import Minus from 'material-ui/svg-icons/navigation/arrow-back';
-import Plus from 'material-ui/svg-icons/navigation/arrow-forward';
-
 export default class Account extends Component {
   constructor(props) {
     super(props);
