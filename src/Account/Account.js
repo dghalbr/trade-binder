@@ -51,6 +51,7 @@ export default class Account extends Component {
               <TableHeaderColumn>Set</TableHeaderColumn>
               <TableHeaderColumn className="wantColumn">Want</TableHeaderColumn>
               <TableHeaderColumn className="tradeColumn">Trade</TableHeaderColumn>
+              <TableHeaderColumn className="deleteColumn" />
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
@@ -67,6 +68,9 @@ export default class Account extends Component {
                 <FontAwesomeIcon icon={faMinus} />
                 <span className="iconStyles">0</span>
                 <FontAwesomeIcon icon={faPlus} />
+              </TableRowColumn>
+              <TableRowColumn className="valign-wrapper deleteColumn">
+                <RaisedButton secondary={true} label="Delete" id="deleteCard" />
               </TableRowColumn>
             </TableRow>
           </TableBody>
