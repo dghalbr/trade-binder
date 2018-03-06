@@ -4,6 +4,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faMinus, faPlus } from '@fortawesome/fontawesome-free-solid';
+
 import Minus from 'material-ui/svg-icons/navigation/arrow-back';
 import Plus from 'material-ui/svg-icons/navigation/arrow-forward';
 
@@ -59,14 +62,14 @@ export default class Account extends Component {
               <TableRowColumn>Jace the Mind Sculptor</TableRowColumn>
               <TableRowColumn>Worldwake</TableRowColumn>
               <TableRowColumn className="valign-wrapper wantColumn">
-                <Minus className="iconStyles" />
-                <span className="iconStyles">4</span>
-                <Plus className="iconStyles" />
+                <FontAwesomeIcon icon={faMinus} />
+                <span className="iconStyles"> 4 </span>
+                <FontAwesomeIcon icon={faPlus} />
               </TableRowColumn>
               <TableRowColumn className="valign-wrapper tradeColumn">
-                <Minus className="iconStyles" />
+                <FontAwesomeIcon icon={faMinus} />
                 <span className="iconStyles">0</span>
-                <Plus className="iconStyles" />
+                <FontAwesomeIcon icon={faPlus} />
               </TableRowColumn>
             </TableRow>
           </TableBody>
