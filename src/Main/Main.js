@@ -172,11 +172,4 @@ export default class Main extends Component {
   drawerToggle() {
     this.setState({ ...this.state, user: this.state.user, appDrawerOpen: !this.state.appDrawerOpen });
   }
-
-  /**
-   *
-   */
-  toggleHove(card) {
-    card.hovered = !card.hovered;
-  }
 }
