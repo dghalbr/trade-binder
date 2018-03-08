@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faMinus, faPlus } from '@fortawesome/fontawesome-free-solid';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow } from 'material-ui/Table';
 import './CardTable.css';
+import CardRow from '../CardRow/CardRow';
 
-export default class Account extends Component {
+export default class CardTable extends Component {
   constructor(props) {
     super(props);
   }
@@ -24,24 +22,7 @@ export default class Account extends Component {
           </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={false}>
-          <TableRow selectable={false}>
-            <TableRowColumn className="firstColumn">1</TableRowColumn>
-            <TableRowColumn>Jace the Mind Sculptor</TableRowColumn>
-            <TableRowColumn>Worldwake</TableRowColumn>
-            <TableRowColumn className="valign-wrapper wantColumn">
-              <FontAwesomeIcon icon={faMinus} />
-              <span className="iconStyles"> 4 </span>
-              <FontAwesomeIcon icon={faPlus} />
-            </TableRowColumn>
-            <TableRowColumn className="valign-wrapper tradeColumn">
-              <FontAwesomeIcon icon={faMinus} />
-              <span className="iconStyles">0</span>
-              <FontAwesomeIcon icon={faPlus} />
-            </TableRowColumn>
-            <TableRowColumn className="valign-wrapper deleteColumn">
-              <RaisedButton secondary={true} label="Delete" id="deleteCard" />
-            </TableRowColumn>
-          </TableRow>
+          {this.props.cardCollection.map(item => <CardRow card={item} />)}
         </TableBody>
       </Table>
     );
