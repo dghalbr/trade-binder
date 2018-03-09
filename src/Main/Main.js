@@ -3,21 +3,45 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-import Auth from '../Auth/Auth';
 import Account from '../Account/Account';
 import NavBar from '../NavBar/NavBar';
 import createBrowserHistory from 'history/createBrowserHistory';
+import { firebaseAuth } from '../config/constants';
 
 const history = createBrowserHistory();
-const auth = new Auth();
+
+function PrivateRoute({ component: Component, exact, strict, path, authed, ...rest }) {
+  return (
+    <Route
+      exact={exact}
+      strict={strict}
+      path={path}
+      {...rest}
+      render={props =>
+        authed === true ? (
+          <Component {...props} {...rest} />
+        ) : (
+          <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+        )
+      }
+    />
+  );
+}
+
+function PublicRoute({ component: Component, exact, strict, path, authed, ...rest }) {
+  return (
+    <Route exact={exact} strict={strict} path={path} {...rest} render={props => <Component {...props} {...rest} />} />
+  );
+}
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: auth.isLoggedIn(),
       appDrawerOpen: false,
-      user: auth.getCurrentUser(),
+      user: firebaseAuth().currentUser,
+      authed: firebaseAuth().currentUser ? true : false,
+      loading: true,
       cardCollection: [
         {
           id: 1,
@@ -26,9 +50,18 @@ export default class Main extends Component {
           want: 4,
           trade: 0,
           hovered: false
+        },
+        {
+          id: 2,
+          name: 'Kudzu',
+          set: 'Alpha',
+          want: 1,
+          trade: 0,
+          hovered: false
         }
       ]
     };
+
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.register = this.register.bind(this);
@@ -37,15 +70,24 @@ export default class Main extends Component {
     this.passwordReset = this.passwordReset.bind(this);
   }
 
-  componentDidUpdate() {
-    /*
-     * DGH - Auth.js isn't a React Component so if a user
-     * becomes logged in or out we need to re-render those 
-     * buttons. 
-     */
-    if (this.state.isLoggedIn !== auth.isLoggedIn()) {
-      this.setState({ ...this.state, isLoggedIn: !this.state.isLoggedIn });
-    }
+  componentDidMount() {
+    this.removeListener = firebaseAuth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          authed: true,
+          loading: false
+        });
+      } else {
+        this.setState({
+          authed: false,
+          loading: false
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.removeListener();
   }
 
   render() {
@@ -53,7 +95,7 @@ export default class Main extends Component {
       <Router history={history}>
         <div>
           <NavBar
-            isLoggedIn={this.state.isLoggedIn}
+            authed={this.state.authed}
             logout={this.logout}
             appDrawerOpen={this.state.appDrawerOpen}
             drawerToggle={this.drawerToggle}
@@ -62,27 +104,21 @@ export default class Main extends Component {
             <br />
             <br />
             <Switch>
-              <Route exact path="/" render={state => <Home />} />
-              <Route
+              <PublicRoute exact path="/" component={Home} />
+              <PublicRoute
                 path="/login"
-                render={state => (
-                  <Login user={this.state.user} handleLogin={this.login} passwordReset={this.passwordReset} />
-                )}
+                handleLogin={this.login}
+                passwordReset={this.passwordReset}
+                component={Login}
               />
-              <Route path="/register" render={state => <Register handleRegister={this.register} />} />
-              <Route
+              <PublicRoute path="/register" handleRegister={this.register} component={Register} />
+              <PrivateRoute
+                authed={this.state.authed}
                 path="/account"
-                render={state =>
-                  this.state.user ? (
-                    <Account
-                      user={this.state.user}
-                      passwordUpdate={this.passwordUpdate}
-                      cardCollection={this.state.cardCollection}
-                    />
-                  ) : (
-                    <Redirect to="/login" />
-                  )
-                }
+                user={firebaseAuth().currentUser}
+                passwordUpdate={this.passwordUpdate}
+                component={Account}
+                cardCollection={this.state.cardCollection}
               />
             </Switch>
           </div>
@@ -97,11 +133,11 @@ export default class Main extends Component {
    * @param  {string} password
    */
   login(username, password) {
-    if (!auth.isLoggedIn()) {
-      auth
-        .doSignInAndRetrieveDataWithEmailAndPassword(username, password)
+    if (!firebaseAuth().currentUser) {
+      firebaseAuth()
+        .signInAndRetrieveDataWithEmailAndPassword(username, password)
         .then(user => {
-          this.setState({ ...this.state, user: user.user, isLoggedIn: true, appDrawerOpen: false });
+          this.setState({ ...this.state, user: user.user, authed: true, appDrawerOpen: false });
           history.push({ pathname: '/account' });
         })
         .catch(function(error) {
@@ -122,10 +158,12 @@ export default class Main extends Component {
    * Logout of the application via Firebase
    */
   logout() {
-    auth.doSignOut().then(() => {
-      this.setState({ ...this.state, user: null, isLoggedIn: false, appDrawerOpen: false });
-      history.push({ pathname: '/login' });
-    });
+    firebaseAuth()
+      .signOut()
+      .then(() => {
+        this.setState({ ...this.state, user: null, authed: false, appDrawerOpen: false });
+        history.push({ pathname: '/login' });
+      });
   }
 
   /**
@@ -134,10 +172,10 @@ export default class Main extends Component {
    * @param  {string} password
    */
   register(username, password) {
-    auth
-      .doCreateUserWithEmailAndPassword(username, password)
+    firebaseAuth()
+      .signInWithEmailAndPassword(username, password)
       .then(user => {
-        this.setState({ ...this.state, user: user, isLoggedIn: true, appDrawerOpen: false });
+        this.setState({ ...this.state, user: user, authed: true, appDrawerOpen: false });
         history.push({ pathname: '/account' });
       })
       .catch(function(error) {
@@ -156,14 +194,14 @@ export default class Main extends Component {
    * @param  {string} password
    */
   passwordUpdate(password) {
-    return this.state.user.updatePassword(password);
+    return firebaseAuth().currentUser.updatePassword(password);
   }
   /**
    * Reset a User's password via Firebase
    * @param  {string} email
    */
   passwordReset(email) {
-    return auth.doPasswordReset(email);
+    return firebaseAuth().sendPasswordResetEmail(email);
   }
 
   /**
