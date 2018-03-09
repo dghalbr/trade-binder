@@ -17,7 +17,17 @@ export default class Main extends Component {
     this.state = {
       isLoggedIn: auth.isLoggedIn(),
       appDrawerOpen: false,
-      user: auth.getCurrentUser()
+      user: auth.getCurrentUser(),
+      cardCollection: [
+        {
+          id: 1,
+          name: 'Jace the Mind Sculptor',
+          set: 'Worldwake',
+          want: 4,
+          trade: 0,
+          hovered: false
+        }
+      ]
     };
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -64,7 +74,11 @@ export default class Main extends Component {
                 path="/account"
                 render={state =>
                   this.state.user ? (
-                    <Account user={this.state.user} passwordUpdate={this.passwordUpdate} />
+                    <Account
+                      user={this.state.user}
+                      passwordUpdate={this.passwordUpdate}
+                      cardCollection={this.state.cardCollection}
+                    />
                   ) : (
                     <Redirect to="/login" />
                   )
