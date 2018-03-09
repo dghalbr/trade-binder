@@ -14,6 +14,7 @@ export default class CardRow extends Component {
 
   updateHover() {
     console.log(this.props.card);
+    //console.log(this.props.onHover);
     this.props.onHover(this.props.card);
   }
 

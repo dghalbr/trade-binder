@@ -6,14 +6,22 @@ import CardRow from '../CardRow/CardRow';
 export default class CardTable extends Component {
   constructor(props) {
     super(props);
+    this.onHover = this.onHover.bind(this);
+  }
+
+  onHover(card) {
+    console.log('In cardTable');
+    this.props.handleHover(card);
   }
 
   render() {
-    var self = this;
+    let passCard = function(hover) {
+      return function(card) {
+        return <CardRow key={card.id} card={card} onHover={hover} />;
+      };
+    };
 
-    let rows = this.props.cardCollection.map(function(item) {
-      return <CardRow key={item.id} card={item} onHover={self.props.handleHover} />;
-    });
+    let rows = this.props.cardCollection.map(passCard(this.props.onHover));
 
     return (
       <Table>

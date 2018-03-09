@@ -214,6 +214,7 @@ export default class Main extends Component {
   }
 
   updatehovered(card) {
+    console.log('In main.js updateHovered');
     let cardList = this.state.cardCollection;
     cardList.map(c => {
       if (c.id === card.id) {
