@@ -39,7 +39,7 @@ export default class Account extends Component {
           id="updatePasswordButton"
           onClick={this.passwordUpdate}
         />
-        <CardTable cardCollection={this.props.cardCollection} />
+        <CardTable cardCollection={this.props.cardCollection} handleHover={this.props.handleHover} />
       </div>
     );
   }

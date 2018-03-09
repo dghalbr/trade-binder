@@ -68,6 +68,7 @@ export default class Main extends Component {
     this.drawerToggle = this.drawerToggle.bind(this);
     this.passwordUpdate = this.passwordUpdate.bind(this);
     this.passwordReset = this.passwordReset.bind(this);
+    this.updatehovered = this.updatehovered.bind(this);
   }
 
   componentDidMount() {
@@ -119,6 +120,7 @@ export default class Main extends Component {
                 passwordUpdate={this.passwordUpdate}
                 component={Account}
                 cardCollection={this.state.cardCollection}
+                handleHover={this.state.updatehovered}
               />
             </Switch>
           </div>
@@ -209,5 +211,17 @@ export default class Main extends Component {
    */
   drawerToggle() {
     this.setState({ ...this.state, user: this.state.user, appDrawerOpen: !this.state.appDrawerOpen });
+  }
+
+  updatehovered(card) {
+    let cardList = this.state.cardCollection;
+    cardList.map(c => {
+      if (c.id === card.id) {
+        return { ...c, hovered: !c.hovered };
+      } else {
+        return c;
+      }
+    });
+    this.setState({ ...this.state, cardCollection: cardList });
   }
 }

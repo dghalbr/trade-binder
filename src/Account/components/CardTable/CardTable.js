@@ -9,6 +9,12 @@ export default class CardTable extends Component {
   }
 
   render() {
+    var self = this;
+
+    let rows = this.props.cardCollection.map(function(item) {
+      return <CardRow key={item.id} card={item} onHover={self.props.handleHover} />;
+    });
+
     return (
       <Table>
         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
@@ -21,10 +27,10 @@ export default class CardTable extends Component {
             <TableHeaderColumn className="deleteColumn" />
           </TableRow>
         </TableHeader>
-        <TableBody displayRowCheckbox={false}>
-          {this.props.cardCollection.map(item => <CardRow card={item} />)}
-        </TableBody>
+        <TableBody displayRowCheckbox={false}>{rows}</TableBody>
       </Table>
     );
   }
 }
+
+//          {this.props.cardCollection.map(item => (<CardRow key={item.id} card={item} onHover={this.props.handleHover} />          ))}
