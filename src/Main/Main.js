@@ -41,7 +41,17 @@ export default class Main extends Component {
       appDrawerOpen: false,
       user: firebaseAuth().currentUser,
       authed: firebaseAuth().currentUser ? true : false,
-      loading: true
+      loading: true,
+      cardCollection: [
+        {
+          id: 1,
+          name: 'Jace the Mind Sculptor',
+          set: 'Worldwake',
+          want: 4,
+          trade: 0,
+          hovered: false
+        }
+      ]
     };
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -112,6 +122,7 @@ export default class Main extends Component {
                 user={firebaseAuth().currentUser}
                 passwordUpdate={this.passwordUpdate}
                 component={Account}
+                cardCollection={this.state.cardCollection}
               />
             </Switch>
           </div>
