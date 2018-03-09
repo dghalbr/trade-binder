@@ -3,20 +3,14 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-// import Auth from '../Auth/Auth';
 import Account from '../Account/Account';
 import NavBar from '../NavBar/NavBar';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { firebaseAuth } from '../config/constants';
 
 const history = createBrowserHistory();
-// const auth = new Auth();
-
-//TODO: CLEAN UP! get rid of isloggedin if we use authed or vice versa
 
 function PrivateRoute({ component: Component, exact, strict, path, authed, ...rest }) {
-  console.log('authed: ', authed);
-  console.log('rest: ', rest);
   return (
     <Route
       exact={exact}
@@ -34,16 +28,16 @@ function PrivateRoute({ component: Component, exact, strict, path, authed, ...re
   );
 }
 
-function PublicRoute({ component: Component, ...rest }) {
-  console.log('rest: ', rest);
-  return <Route {...rest} render={props => <Component {...props} />} />;
+function PublicRoute({ component: Component, exact, strict, path, authed, ...rest }) {
+  return; //TODO test out exact working on Home
+  <Route exact={exact} strict={strict} path={path} {...rest} render={props => <Component {...props} {...rest} />} />;
 }
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: firebaseAuth().currentUser ? true : false,
+      // isLoggedIn: firebaseAuth().currentUser ? true : false,
       appDrawerOpen: false,
       user: firebaseAuth().currentUser,
       authed: firebaseAuth().currentUser ? true : false,
@@ -81,10 +75,11 @@ export default class Main extends Component {
      * DGH - firebaseAuth.js isn't a React Component so if a user
      * becomes logged in or out we need to re-render those 
      * buttons. 
-     */
-    if (this.state.authed !== this.state.isLoggedIn) {
-      this.setState({ ...this.state, isLoggedIn: this.state.authed });
-    }
+    // */
+    //Do we need this anymore now that authed is on the observable?
+    // if (this.state.authed !== this.state.isLoggedIn) {
+    //   this.setState({ ...this.state, isLoggedIn: this.state.authed });
+    // }
   }
 
   render() {
@@ -92,7 +87,7 @@ export default class Main extends Component {
       <Router history={history}>
         <div>
           <NavBar
-            isLoggedIn={this.state.isLoggedIn}
+            isLoggedIn={this.state.authed}
             logout={this.logout}
             appDrawerOpen={this.state.appDrawerOpen}
             drawerToggle={this.drawerToggle}
@@ -102,11 +97,15 @@ export default class Main extends Component {
             <br />
             <Switch>
               <Route exact path="/" render={state => <Home />} />
-              <Route
+              <PublicRoute exact="exact" path="/" component={Home} />
+
+              <PublicRoute
                 path="/login"
-                render={state => <Login handleLogin={this.login} passwordReset={this.passwordReset} />}
+                handleLogin={this.login}
+                passwordReset={this.passwordReset}
+                component={Login}
               />
-              <Route path="/register" render={state => <Register handleRegister={this.register} />} />
+              <PublicRoute path="/register" handleRegister={this.register} component={Register} />
               <PrivateRoute
                 authed={this.state.authed}
                 path="/account"
@@ -122,14 +121,6 @@ export default class Main extends Component {
   }
 
   /**
-   * 
-              <Route path="/login" handleLogin={this.login}
-                passwordReset={this.passwordReset} component={Login} />
-   * 
-   * 
-   * 
-   * 
-   * 
    * Login to the application via Firebase
    * @param  {string} username
    * @param  {string} password
@@ -139,7 +130,8 @@ export default class Main extends Component {
       firebaseAuth()
         .signInAndRetrieveDataWithEmailAndPassword(username, password)
         .then(user => {
-          this.setState({ ...this.state, user: user.user, isLoggedIn: true, appDrawerOpen: false });
+          // this.setState({ ...this.state, user: user.user, isLoggedIn: true, appDrawerOpen: false }); do we still need authed on this?
+          this.setState({ ...this.state, user: user.user, authed: true, appDrawerOpen: false });
           history.push({ pathname: '/account' });
         })
         .catch(function(error) {
@@ -163,7 +155,8 @@ export default class Main extends Component {
     firebaseAuth()
       .signOut()
       .then(() => {
-        this.setState({ ...this.state, user: null, isLoggedIn: false, appDrawerOpen: false });
+        //this.setState({ ...this.state, user: null, isLoggedIn: false, appDrawerOpen: false }); do we still need authed on this?
+        this.setState({ ...this.state, user: null, authed: false, appDrawerOpen: false });
         history.push({ pathname: '/login' });
       });
   }
@@ -177,7 +170,8 @@ export default class Main extends Component {
     firebaseAuth
       .signInWithEmailAndPassword(username, password)
       .then(user => {
-        this.setState({ ...this.state, user: user, isLoggedIn: true, appDrawerOpen: false });
+        // this.setState({ ...this.state, user: user, isLoggedIn: true, appDrawerOpen: false }); do we still need authed on this?
+        this.setState({ ...this.state, user: user, authed: true, appDrawerOpen: false });
         history.push({ pathname: '/account' });
       })
       .catch(function(error) {
