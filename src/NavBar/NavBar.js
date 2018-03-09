@@ -15,7 +15,7 @@ export default class NavBar extends Component {
     return (
       <div>
         <AppBar onClick={this.props.drawerToggle} className="NavBar" title="TradeBinder" />
-        {!this.props.isLoggedIn ? (
+        {!this.props.authed ? (
           <Drawer open={this.props.appDrawerOpen}>
             <MenuItem primaryText="Home" onClick={this.props.drawerToggle} containerElement={<Link to="/" />} />
             <MenuItem primaryText="Login" onClick={this.props.drawerToggle} containerElement={<Link to="/login" />} />

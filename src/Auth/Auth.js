@@ -1,35 +1,40 @@
+//I'm not sure we even need this, keeping incase we change our minds.
+
+// import { ref, firebaseAuth } from '../config/constants';
+
+// export default class Auth {
+//   register(email, pw) {
+//     return firebaseAuth()
+//       .createUserWithEmailAndPassword(email, pw)
+//       .then(this.saveUser());
+//   }
+
+//   logout() {
+//     return firebaseAuth().signOut();
+//   }
+
+//   login(email, pw) {
+//     return firebaseAuth().signInAndRetrieveDataWithEmailAndPassword(email, pw);
+//   }
+
+//   resetPassword(email) {
+//     return firebaseAuth().sendPasswordResetEmail(email);
+//   }
+
+//   saveUser(user) {
+//     return ref
+//       .child(`users/${user.uid}/info`)
+//       .set({
+//         email: user.email,
+//         uid: user.uid
+//       })
+//       .then(() => user);
+//   }
+// }
+
 // import * as firebase from 'firebase';
 // import dotenv from 'dotenv';
 // dotenv.config({ silent: true });
-import { ref, firebaseAuth } from '../config/constants';
-
-export function auth(email, pw) {
-  return firebaseAuth()
-    .createUserWithEmailAndPassword(email, pw)
-    .then(saveUser);
-}
-
-export function logout() {
-  return firebaseAuth().signOut();
-}
-
-export function login(email, pw) {
-  return firebaseAuth().signInAndRetrieveDataWithEmailAndPassword(email, pw);
-}
-
-export function resetPassword(email) {
-  return firebaseAuth().sendPasswordResetEmail(email);
-}
-
-export function saveUser(user) {
-  return ref
-    .child(`users/${user.uid}/info`)
-    .set({
-      email: user.email,
-      uid: user.uid
-    })
-    .then(() => user);
-}
 
 // let defaultApp = null;
 
