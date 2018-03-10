@@ -8,19 +8,22 @@ import './CardRow.css';
 export default class CardRow extends Component {
   constructor(props) {
     super(props);
-    this.changeHover = this.changeHover.bind(this);
+    this.hoverOn = this.hoverOn.bind(this);
+    this.hoverOff = this.hoverOff.bind(this);
   }
 
-  changeHover(card) {
-    this.props.hoveredupdate(this.props.card);
+  hoverOn() {
+    this.props.enterhover(this.props.card);
+  }
+
+  hoverOff() {
+    this.props.leavehover(this.props.card);
   }
 
   render() {
-    const self = this;
-    const { card, hoveredupdate, ...otherProps } = self.props;
-
+    const { card, enterhover, leavehover, ...otherProps } = this.props;
     return (
-      <TableRow selectable={false} onMouseEnter={this.changeHover} onMouseLeave={this.changeHover} {...otherProps}>
+      <TableRow selectable={false} onMouseEnter={this.hoverOn} onMouseLeave={this.hoverOff} {...otherProps}>
         <TableRowColumn className="firstColumn">{card.id}</TableRowColumn>
         <TableRowColumn>{card.name}</TableRowColumn>
         <TableRowColumn>{card.set}</TableRowColumn>

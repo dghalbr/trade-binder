@@ -10,9 +10,9 @@ export default class CardTable extends Component {
   }
 
   makeRows() {
-    const { cardCollection, hoveredUpdate, ...otherProps } = this.props;
+    const { cardCollection, enterHovered, leaveHover, ...otherProps } = this.props;
     return cardCollection.map(card => {
-      return <CardRow key={card.id} card={card} hoveredupdate={hoveredUpdate} {...otherProps} />;
+      return <CardRow key={card.id} card={card} enterhover={enterHovered} leavehover={leaveHover} {...otherProps} />;
     });
   }
 
