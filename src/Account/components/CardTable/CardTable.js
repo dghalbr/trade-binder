@@ -6,23 +6,17 @@ import CardRow from '../CardRow/CardRow';
 export default class CardTable extends Component {
   constructor(props) {
     super(props);
-    this.onHover = this.onHover.bind(this);
+    this.makeRows = this.makeRows.bind(this);
   }
 
-  onHover(card) {
-    console.log('In cardTable');
-    this.props.handleHover(card);
+  makeRows() {
+    const { cardCollection, hoveredUpdate, ...otherProps } = this.props;
+    return cardCollection.map(card => {
+      return <CardRow key={card.id} card={card} hoveredupdate={hoveredUpdate} {...otherProps} />;
+    });
   }
 
   render() {
-    let passCard = function(hover) {
-      return function(card) {
-        return <CardRow key={card.id} card={card} onHover={hover} />;
-      };
-    };
-
-    let rows = this.props.cardCollection.map(passCard(this.props.onHover));
-
     return (
       <Table>
         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
@@ -35,10 +29,8 @@ export default class CardTable extends Component {
             <TableHeaderColumn className="deleteColumn" />
           </TableRow>
         </TableHeader>
-        <TableBody displayRowCheckbox={false}>{rows}</TableBody>
+        <TableBody displayRowCheckbox={false}>{this.makeRows()}</TableBody>
       </Table>
     );
   }
 }
-
-//          {this.props.cardCollection.map(item => (<CardRow key={item.id} card={item} onHover={this.props.handleHover} />          ))}
