@@ -6,6 +6,14 @@ import CardRow from '../CardRow/CardRow';
 export default class CardTable extends Component {
   constructor(props) {
     super(props);
+    this.makeRows = this.makeRows.bind(this);
+  }
+
+  makeRows() {
+    const { cardCollection, enterHovered, leaveHover, ...otherProps } = this.props;
+    return cardCollection.map(card => {
+      return <CardRow key={card.id} card={card} enterhover={enterHovered} leavehover={leaveHover} {...otherProps} />;
+    });
   }
 
   render() {
@@ -21,9 +29,7 @@ export default class CardTable extends Component {
             <TableHeaderColumn className="deleteColumn" />
           </TableRow>
         </TableHeader>
-        <TableBody displayRowCheckbox={false}>
-          {this.props.cardCollection.map(item => <CardRow card={item} />)}
-        </TableBody>
+        <TableBody displayRowCheckbox={false}>{this.makeRows()}</TableBody>
       </Table>
     );
   }

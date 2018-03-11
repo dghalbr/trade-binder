@@ -68,6 +68,8 @@ export default class Main extends Component {
     this.drawerToggle = this.drawerToggle.bind(this);
     this.passwordUpdate = this.passwordUpdate.bind(this);
     this.passwordReset = this.passwordReset.bind(this);
+    this.enterHovered = this.enterHovered.bind(this);
+    this.leaveHover = this.leaveHover.bind(this);
   }
 
   componentDidMount() {
@@ -119,6 +121,8 @@ export default class Main extends Component {
                 passwordUpdate={this.passwordUpdate}
                 component={Account}
                 cardCollection={this.state.cardCollection}
+                enterHovered={this.enterHovered}
+                leaveHover={this.leaveHover}
               />
             </Switch>
           </div>
@@ -209,5 +213,31 @@ export default class Main extends Component {
    */
   drawerToggle() {
     this.setState({ ...this.state, user: this.state.user, appDrawerOpen: !this.state.appDrawerOpen });
+  }
+
+  enterHovered(card) {
+    let cardList = this.state.cardCollection;
+    let newCardList = cardList.map(c => {
+      if (c.id === card.id) {
+        return { ...c, hovered: true };
+      } else {
+        return { ...c, hovered: false };
+      }
+    });
+
+    this.setState({ ...this.state, cardCollection: newCardList });
+  }
+
+  leaveHover(card) {
+    let cardList = this.state.cardCollection;
+    let newCardList = cardList.map(c => {
+      if (c.id === card.id) {
+        return { ...c, hovered: false };
+      } else {
+        return c;
+      }
+    });
+
+    this.setState({ ...this.state, cardCollection: newCardList });
   }
 }
