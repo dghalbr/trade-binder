@@ -221,7 +221,7 @@ export default class Main extends Component {
       if (c.id === card.id) {
         return { ...c, hovered: true };
       } else {
-        return c;
+        return { ...c, hovered: false };
       }
     });
 
